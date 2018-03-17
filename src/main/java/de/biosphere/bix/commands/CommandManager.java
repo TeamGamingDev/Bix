@@ -32,10 +32,8 @@ public class CommandManager {
         arguments[0] = arguments[0].replace("-", "");
         for (Command command : this.availableCommands) {
             if(command.getCategorie() == Command.Categorie.OWNER && !message.getAuthor().getId().equals("357867452807512075")){
-                System.out.println(1 + "--" + command.getCommand());
                 continue;
             } else if (command.getCategorie() == Command.Categorie.STAFF && !message.getMember().hasPermission(Permission.MESSAGE_MANAGE)){
-                System.out.println(2 + "--" + command.getCommand());
                 continue;
             }
 
