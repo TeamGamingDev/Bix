@@ -70,6 +70,9 @@ public class MessageRecieveListener extends ListenerAdapter {
     @Override
     public void onPrivateMessageReceived(PrivateMessageReceivedEvent event) {
         super.onPrivateMessageReceived(event);
+        if (event.getAuthor().isBot()) {
+            return;
+        }
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(Color.GREEN);
         embedBuilder.setDescription("Private messages are disabled");
