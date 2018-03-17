@@ -75,8 +75,7 @@ public class MessageRecieveListener extends ListenerAdapter {
         }
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setColor(Color.GREEN);
-        embedBuilder.setDescription("Private messages are disabled");
+        embedBuilder.setDescription("Private messages are disabled\n[Bix Discord](https://discord.gg/3By2ZPC)");
         event.getChannel().sendMessage(embedBuilder.build()).queue();
-        event.getChannel().sendMessage("discord.gg/3By2ZPC").queue();
     }
 }
