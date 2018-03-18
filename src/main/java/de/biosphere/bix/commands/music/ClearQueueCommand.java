@@ -15,17 +15,17 @@ public class ClearQueueCommand extends Command {
     }
 
     @Override
-    public void execute(String[] args, Message msg) {
-        if (msg.getMember().getVoiceState() != null && msg.getMember().getVoiceState().inVoiceChannel()) {
-            if (msg.getMember().getVoiceState().getChannel().getMembers().contains(msg.getGuild().getSelfMember())) {
-                Bix.getInstance().getMusicManager().clearQueue(msg.getGuild());
-                Bix.getInstance().getMusicManager().stop(msg.getGuild());
-                msg.getTextChannel().sendMessage(getEmbed(msg.getGuild(), msg.getAuthor()).setDescription("Queue cleared").build()).queue();
+    public void execute(String[] args, Message message) {
+        if (message.getMember().getVoiceState() != null && message.getMember().getVoiceState().inVoiceChannel()) {
+            if (message.getMember().getVoiceState().getChannel().getMembers().contains(message.getGuild().getSelfMember())) {
+                Bix.getInstance().getMusicManager().clearQueue(message.getGuild());
+                Bix.getInstance().getMusicManager().stop(message.getGuild());
+                message.getTextChannel().sendMessage(getEmbed(message.getGuild(), message.getAuthor()).setDescription("Queue cleared").build()).queue();
             } else {
-                msg.getTextChannel().sendMessage(getEmbed(msg.getGuild(), msg.getAuthor()).setDescription("You are not in my voice channel").build()).queue();
+                message.getTextChannel().sendMessage(getEmbed(message.getGuild(), message.getAuthor()).setDescription("You are not in my voice channel").build()).queue();
             }
         } else {
-            msg.getTextChannel().sendMessage(getEmbed(msg.getGuild(), msg.getAuthor()).setDescription("You are not in a voice channel").build()).queue();
+            message.getTextChannel().sendMessage(getEmbed(message.getGuild(), message.getAuthor()).setDescription("You are not in a voice channel").build()).queue();
         }
     }
 }
