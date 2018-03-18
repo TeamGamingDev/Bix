@@ -4,6 +4,7 @@ import ai.api.AIConfiguration;
 import ai.api.AIDataService;
 import de.biosphere.bix.commands.CommandManager;
 import de.biosphere.bix.listener.other.ReadyListener;
+import de.biosphere.bix.music.MusicManager;
 import io.sentry.Sentry;
 import lombok.Getter;
 import net.dv8tion.jda.core.AccountType;
@@ -29,6 +30,7 @@ public class Bix {
     private final List<JDA> shardList;
     private final CommandManager commandManager;
     private final Logger logger = LoggerFactory.getLogger("de.biosphere.bix");
+    private final MusicManager musicManager;
     private AIDataService aiDataService;
 
 
@@ -58,6 +60,7 @@ public class Bix {
                 e.printStackTrace();
             }
         }
+        musicManager = new MusicManager();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> shardList.forEach(JDA::shutdown)));
     }
