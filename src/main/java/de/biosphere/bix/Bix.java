@@ -1,5 +1,7 @@
 package de.biosphere.bix;
 
+import ai.api.AIConfiguration;
+import ai.api.AIDataService;
 import de.biosphere.bix.commands.CommandManager;
 import de.biosphere.bix.listener.other.ReadyListener;
 import io.sentry.Sentry;
@@ -27,6 +29,7 @@ public class Bix {
     private final List<JDA> shardList;
     private final CommandManager commandManager;
     private final Logger logger = LoggerFactory.getLogger("de.biosphere.bix");
+    private AIDataService aiDataService;
 
 
     private Bix(){
@@ -34,6 +37,9 @@ public class Bix {
 
         shardList = new ArrayList<>();
         commandManager = new CommandManager();
+        if(System.getenv("APIAI-TOKEN") != null){
+            aiDataService = new AIDataService(new AIConfiguration(System.getenv("APIAI-TOKEN")));
+        }
 
         JDABuilder jda = new JDABuilder(AccountType.BOT)
                 .setToken(System.getenv("DISCORD-TOKEN"))
