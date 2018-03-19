@@ -13,6 +13,7 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import space.botlist.api.BotlistSpaceClient;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class Bix {
     private final Logger logger = LoggerFactory.getLogger("de.biosphere.bix");
     private final MusicManager musicManager;
     private AIDataService aiDataService;
+    private BotlistSpaceClient botlistSpaceClient;
 
 
     private Bix(){
@@ -60,6 +62,11 @@ public class Bix {
                 e.printStackTrace();
             }
         }
+
+        if (System.getenv("BLSPACE-TOKEN") != null && !shardList.isEmpty()) {
+            botlistSpaceClient = new BotlistSpaceClient(System.getenv("BLSPACE-TOKEN"), shardList.get(0).getSelfUser().getId());
+        }
+
         musicManager = new MusicManager();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> shardList.forEach(JDA::shutdown)));
