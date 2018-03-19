@@ -22,7 +22,7 @@ public class PlayCommand extends Command {
     public void execute(String[] args, Message message) {
         if (message.getMember().getVoiceState() != null && message.getMember().getVoiceState().inVoiceChannel()) {
             VoiceChannel channel = message.getMember().getVoiceState().getChannel();
-            if (!message.getMember().getVoiceState().getChannel().getMembers().contains(message.getGuild().getSelfMember())) {
+            if (!message.getMember().getVoiceState().getChannel().getMembers().contains(message.getGuild().getSelfMember()) && message.getGuild().getAudioManager().getConnectedChannel() != null) {
                 message.getTextChannel().sendMessage(getEmbed(message.getGuild(), message.getAuthor()).setDescription("You are not in my voice channel").build()).queue();
                 return;
             }
